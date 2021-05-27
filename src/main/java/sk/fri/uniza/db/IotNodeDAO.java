@@ -2,8 +2,10 @@ package sk.fri.uniza.db;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import sk.fri.uniza.model.IotNode;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public class IotNodeDAO extends AbstractDAO<IotNodeDAO> {
@@ -22,21 +24,21 @@ public class IotNodeDAO extends AbstractDAO<IotNodeDAO> {
     }
 
     public IotNode findById(Long id) {
-        //TODO Doplniť
+        currentSession().get(IotNode.class, id);
         return null;
     }
 
     public IotNode update(IotNode iotNode) {
-        //TODO Doplniť
-        return null;
+        return (IotNode)currentSession().merge(iotNode);
     }
 
     public List<IotNode> findByHouseHold(Long houseHoldId) {
-        //TODO Doplniť
-        return null;
+
+        return (List<IotNode>)list(namedQuery("IotNode_findByHouseHold").setParameter("name", houseHoldId));
     }
 
+    @SuppressWarnings("unchecked")
     public List<IotNode> allIotNodes() {
-        return null;
+        return list(namedQuery("allIotNodes"));
     }
 }
