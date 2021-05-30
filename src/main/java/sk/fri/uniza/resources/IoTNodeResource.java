@@ -26,7 +26,7 @@ public class IoTNodeResource {
 
     @POST // JAX-RS
     @UnitOfWork //Otvorí novú hibernate session //Dropwizzard
-    @ApiOperation(value = "Pridá nové dáta") // Swagger
+    @ApiOperation(value = "Pridá nový typ Node") // Swagger
     public IotNode createIotNode(IotNode iotNode) {
 
         return iotNodeDAO.create(iotNode);
@@ -34,7 +34,7 @@ public class IoTNodeResource {
 
     @PUT /*JAX-RS*/
     @UnitOfWork //Otvorí novú hibernate session // Dropwizard
-    @ApiOperation(value = "Úprava existujúcej domácnosti")
+    @ApiOperation(value = "Upraví existujúci Node")
     public IotNode updateIotNode(IotNode iotNode) {
 
         return iotNodeDAO.update(iotNode);
@@ -43,8 +43,7 @@ public class IoTNodeResource {
     @GET // JAX-RS
     @Path("id") // JAX-RS
     @UnitOfWork //Otvorí novú hibernate session // Dropwizzard
-    @ApiOperation(value = "Získanie dát o konkrétnej domácnosti a konkrétneho" +
-            " typu") // Swagger
+    @ApiOperation(value = "Zobrazí typ Node") // Swagger
     public IotNode findIotNode(Long id) {
 
         return iotNodeDAO.findById(id);
@@ -52,8 +51,7 @@ public class IoTNodeResource {
 
     @GET // JAX-RS
     @UnitOfWork //Otvorí novú hibernate session // Dropwizzard
-    @ApiOperation(value = "Získanie dát o konkrétnej domácnosti a konkrétneho" +
-            " typu") // Swagger
+    @ApiOperation(value = "Zobrazí všetky typy Node") // Swagger
     public List<IotNode> allIotNodes() {
 
         return iotNodeDAO.allIotNodes();
