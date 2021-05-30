@@ -5,6 +5,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
+@org.hibernate.annotations.NamedQueries({
+        @org.hibernate.annotations.NamedQuery(name = "IotNode_findByHouseHold",
+                query = "from IotNode where houseHold = :houseHold"),
+        @org.hibernate.annotations.NamedQuery(name = "IotNode_findAll",
+                query = "from IotNode"),
+})
+
+@Entity
 public class IotNode {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +22,7 @@ public class IotNode {
     private Long id;
 
     @NotEmpty
-    @ApiModelProperty(example = "Fero") // Príklad pre swagger doku.
+    @ApiModelProperty(example = "Názov nodu") // Príklad pre swagger doku.
     private String Name;
 
     @ManyToOne()

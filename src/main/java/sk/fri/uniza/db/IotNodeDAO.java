@@ -24,8 +24,7 @@ public class IotNodeDAO extends AbstractDAO<IotNodeDAO> {
     }
 
     public IotNode findById(Long id) {
-        currentSession().get(IotNode.class, id);
-        return null;
+        return currentSession().get(IotNode.class, id);
     }
 
     public IotNode update(IotNode iotNode) {
@@ -34,11 +33,11 @@ public class IotNodeDAO extends AbstractDAO<IotNodeDAO> {
 
     public List<IotNode> findByHouseHold(Long houseHoldId) {
 
-        return (List<IotNode>)list(namedQuery("IotNode_findByHouseHold").setParameter("name", houseHoldId));
+        return (List<IotNode>)list(namedQuery("IotNode_findByHouseHold").setParameter("houseHold", houseHoldId));
     }
 
     @SuppressWarnings("unchecked")
     public List<IotNode> allIotNodes() {
-        return list(namedQuery("allIotNodes"));
+        return list(namedQuery("IotNode_findAll"));
     }
 }

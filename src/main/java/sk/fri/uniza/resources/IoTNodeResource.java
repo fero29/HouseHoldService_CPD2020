@@ -1,11 +1,11 @@
 package sk.fri.uniza.resources;
 
 import io.dropwizard.hibernate.UnitOfWork;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import sk.fri.uniza.db.IotNodeDAO;
 import sk.fri.uniza.model.IotNode;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -27,7 +27,7 @@ public class IoTNodeResource {
     @POST // JAX-RS
     @UnitOfWork //Otvorí novú hibernate session //Dropwizzard
     @ApiOperation(value = "Pridá nový typ Node") // Swagger
-    public IotNode createIotNode(IotNode iotNode) {
+    public IotNode createIotNode(@Valid IotNode iotNode) {
 
         return iotNodeDAO.create(iotNode);
     }
@@ -35,16 +35,16 @@ public class IoTNodeResource {
     @PUT /*JAX-RS*/
     @UnitOfWork //Otvorí novú hibernate session // Dropwizard
     @ApiOperation(value = "Upraví existujúci Node")
-    public IotNode updateIotNode(IotNode iotNode) {
+    public IotNode updateIotNode(@Valid IotNode iotNode) {
 
         return iotNodeDAO.update(iotNode);
     }
 
     @GET // JAX-RS
-    @Path("id") // JAX-RS
+    @Path("/{id}") // JAX-RS
     @UnitOfWork //Otvorí novú hibernate session // Dropwizzard
     @ApiOperation(value = "Zobrazí typ Node") // Swagger
-    public IotNode findIotNode(Long id) {
+    public IotNode findIotNode(@PathParam("id") Long id) {
 
         return iotNodeDAO.findById(id);
     }
